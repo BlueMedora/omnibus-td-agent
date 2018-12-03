@@ -2,7 +2,8 @@ require 'erb'
 require 'fileutils'
 require 'rubygems'
 
-name "td-agent"
+name "bm-agent"
+# TODO change these
 maintainer "Treasure Data, Inc"
 homepage "http://treasuredata.com"
 description "Treasure Agent: A data collector for Treasure Data"
@@ -17,7 +18,8 @@ build_version   "3.2.1"
 build_iteration 0
 
 # creates required build directories
-dependency "preparation"
+# TODO determine if this is needed
+# dependency "preparation"
 
 override :ruby, :version => '2.4.5'
 override :zlib, :version => '1.2.11'
@@ -29,7 +31,7 @@ override :fluentd, :version => 'f30865f82a0d19730940a52c7cb12de88d1821fb' # v1.2
 # td-agent dependencies/components
 dependency "td-agent"
 dependency "td-agent-files"
-dependency "td"
+# dependency "td"
 #dependency "td-agent-ui" # fluentd-ui doesn't work with ruby 2.4 because some gems depend on json 1.8
 dependency "td-agent-cleanup"
 

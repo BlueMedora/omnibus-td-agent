@@ -23,7 +23,7 @@ build do
     generate_from_template = ->(dst, src, erb_binding, opts={}) {
       mode = opts.fetch(:mode, 0755)
       destination = dst.gsub('td-agent', project.name)
-      FileUtils.mkdir_p File.dirname(destination)
+      p FileUtils.mkdir_p File.dirname(destination)
       File.open(destination, 'w', mode) do |f|
         f.write ERB.new(File.read(src), nil, '<>').result(erb_binding)
       end
@@ -57,7 +57,8 @@ build do
         generate_from_template.call initd_file_path, template_path, binding, mode: 0755
       end
 
-      systemd_file_path = File.join(project.resources_path, 'etc', 'systemd', project.name + ".service")
+      # TODO use package name
+      systemd_file_path = File.join(project.resources_path, 'etc', 'systemd', "#{project_name}.service")
       template_path = template.call('etc', 'systemd', 'td-agent.service.erb')
       if File.exist?(template_path)
         generate_from_template.call systemd_file_path, template_path, binding, mode: 0755
@@ -66,8 +67,8 @@ build do
 
     # setup /etc/td-agent
     ['td-agent.conf', 'td-agent.conf.tmpl', ['logrotate.d', 'td-agent.logrotate'], ['prelink.conf.d', 'td-agent.conf']].each { |item|
-      conf_path = File.join(project.resources_path, 'etc', 'td-agent', *([item].flatten))
-      generate_from_template.call conf_path, template.call('etc', 'td-agent', *([item].flatten)), binding, mode: 0644
+      conf_path = File.join(project.resources_path, 'etc', project_name, *([item].flatten))
+      generate_from_template.call conf_path, template.call('etc', project_name, *([item].flatten)), binding, mode: 0644
     }
 
     ["td-agent", "td-agent-gem"].each { |command|
