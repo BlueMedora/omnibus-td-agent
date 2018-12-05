@@ -8,6 +8,8 @@ maintainer "Treasure Data, Inc"
 homepage "http://treasuredata.com"
 description "Treasure Agent: A data collector for Treasure Data"
 
+install_dir "/opt/#{name}"
+
 if windows?
   install_dir "#{default_root}/opt/#{name}"
 else
