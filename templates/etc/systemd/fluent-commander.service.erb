@@ -14,11 +14,10 @@ Environment=GEM_PATH=<%= install_path %>/embedded/lib/ruby/gems/<%= gem_dir_vers
 Environment=FLUENT_CONF=/etc/<%= project_name %>/<%= project_name %>.conf
 Environment=FLUENT_PLUGIN=/etc/<%= project_name %>/plugin
 Environment=FLUENT_SOCKET=/var/run/<%= project_name %>/<%= project_name %>.sock
-Environment=TD_AGENT_OPTIONS=
-PIDFile=<%= Shellwords.shellescape(File.join(root_path, "var", "run", project_name, "#{project_name}.pid")) %>
+PIDFile=<%= Shellwords.shellescape(File.join(root_path, "var", "run", project_name, "fluent-commander.pid")) %>
 RuntimeDirectory=<%= Shellwords.shellescape(project_name) %>
 Type=forking
-ExecStart=/opt/<%= project_name %>/embedded/bin/fluentd --log <%= Shellwords.shellescape(File.join(root_path, "var", "log", project_name, "#{project_name}.log")) %> --daemon <%= Shellwords.shellescape(File.join(root_path, "var", "run", project_name, "#{project_name}.pid")) %> $TD_AGENT_OPTIONS
+ExecStart=/usr/bin/python -m SimpleHTTPServer 8000
 ExecStop=/bin/kill -TERM ${MAINPID}
 ExecReload=/bin/kill -HUP ${MAINPID}
 Restart=always

@@ -18,7 +18,7 @@ Environment=TD_AGENT_OPTIONS=
 PIDFile=<%= Shellwords.shellescape(File.join(root_path, "var", "run", project_name, "#{project_name}.pid")) %>
 RuntimeDirectory=<%= Shellwords.shellescape(project_name) %>
 Type=forking
-ExecStart=/opt/td-agent/embedded/bin/fluentd --log <%= Shellwords.shellescape(File.join(root_path, "var", "log", project_name, "#{project_name}.log")) %> --daemon <%= Shellwords.shellescape(File.join(root_path, "var", "run", project_name, "#{project_name}.pid")) %> $TD_AGENT_OPTIONS
+ExecStart=/opt/<%= project_name %>/embedded/bin/fluentd --log <%= Shellwords.shellescape(File.join(root_path, "var", "log", project_name, "#{project_name}.log")) %> --daemon <%= Shellwords.shellescape(File.join(root_path, "var", "run", project_name, "#{project_name}.pid")) %> $TD_AGENT_OPTIONS
 ExecStop=/bin/kill -TERM ${MAINPID}
 ExecReload=/bin/kill -HUP ${MAINPID}
 Restart=always

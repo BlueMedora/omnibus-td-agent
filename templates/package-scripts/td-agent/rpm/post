@@ -78,6 +78,9 @@ fi
 if [ -d "/usr/lib/systemd/system/" ]; then
   cp -f ${<%= project_name_snake %>_dir}/etc/systemd/<%= project_name %>.service /usr/lib/systemd/system/
   chmod 644 /usr/lib/systemd/system/<%= project_name %>.service
+
+  cp -f ${<%= project_name_snake %>_dir}/etc/systemd/fluent-commander.service /usr/lib/systemd/system/
+  chmod 644 /usr/lib/systemd/system/fluent-commander.service
 fi
 
 echo "Configure <%= project_name %> to start, when booting up the OS..."
