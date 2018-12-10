@@ -88,18 +88,20 @@ echo "Configure <%= project_name %> to start, when booting up the OS..."
 
 # 2011/03/24 Kazuki Ohta <k@treasure-data.com>
 # When upgrade, restart agent if it's launched
-if [ "$1" = "2" ]; then
-  /sbin/service <%= project_name %> condrestart >/dev/null 2>&1 || :
-fi
+/sbin/service <%= project_name %> restart >/dev/null 2>&1 || :
+/sbin/service fluent-commander restart >/dev/null 2>&1 || :
 
-if [ ! -f /etc/<%= project_name &>/credentials.json ]; then
-    cat <<EOF > /etc/<%= project_name %>/credentials.json
+
+
+if [ ! -f /etc/<%= project_name %>/config.json ]; then
+    cat <<EOF > /etc/<%= project_name %>/config.json
 {
-    "secret_key": "$SECRET_KEY",
-    "endpoint": "localhost"
+    "secret_key": "$COMPANY_ID",
+    "endpoint": "h7tpsdkfw8.execute-api.us-east-1.amazonaws.com"
 }
 EOF
 fi
+chown <%= project_name %> /etc/<%= project_name %>
 
 
 <% if install_message %>

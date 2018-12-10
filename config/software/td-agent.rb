@@ -1,5 +1,5 @@
 name "td-agent"
-#version '' # git ref
+version '4' # git ref
 
 dependency "jemalloc" unless windows?
 dependency "ruby"

@@ -8,7 +8,6 @@ Wants=network-online.target
 User=<%= Shellwords.shellescape(project_name) %>
 Group=<%= Shellwords.shellescape(project_name) %>
 LimitNOFILE=65536
-Environment=LD_PRELOAD=<%= install_path %>/embedded/lib/libjemalloc.so
 Environment=GEM_HOME=<%= install_path %>/embedded/lib/ruby/gems/<%= gem_dir_version %>/
 Environment=GEM_PATH=<%= install_path %>/embedded/lib/ruby/gems/<%= gem_dir_version %>/
 Environment=FLUENT_CONF=/etc/<%= project_name %>/<%= project_name %>.conf
@@ -16,8 +15,8 @@ Environment=FLUENT_PLUGIN=/etc/<%= project_name %>/plugin
 Environment=FLUENT_SOCKET=/var/run/<%= project_name %>/<%= project_name %>.sock
 PIDFile=<%= Shellwords.shellescape(File.join(root_path, "var", "run", project_name, "fluent-commander.pid")) %>
 RuntimeDirectory=<%= Shellwords.shellescape(project_name) %>
-Type=forking
-ExecStart=/usr/bin/python -m SimpleHTTPServer 8000
+Type=simple
+ExecStart=/opt/<%= project_name %>/embedded/bin/agent
 ExecStop=/bin/kill -TERM ${MAINPID}
 ExecReload=/bin/kill -HUP ${MAINPID}
 Restart=always
