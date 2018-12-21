@@ -3,10 +3,9 @@ require 'fileutils'
 require 'rubygems'
 
 name "bm-agent"
-# TODO change these
-maintainer "Treasure Data, Inc"
-homepage "http://treasuredata.com"
-description "Treasure Agent: A data collector for Treasure Data"
+maintainer "Blue Medora"
+homepage "http://bindplane.com"
+description "A log collector for BindPlane"
 
 install_dir "/opt/#{name}"
 
@@ -16,7 +15,7 @@ else
   install_dir "#{default_root}/#{name}"
 end
 
-build_version   "3.2.2"
+build_version   "1.0.0"
 build_iteration 0
 
 # creates required build directories
@@ -33,8 +32,6 @@ override :fluentd, :version => 'f30865f82a0d19730940a52c7cb12de88d1821fb' # v1.2
 # td-agent dependencies/components
 dependency "td-agent"
 dependency "td-agent-files"
-# dependency "td"
-#dependency "td-agent-ui" # fluentd-ui doesn't work with ruby 2.4 because some gems depend on json 1.8
 dependency "td-agent-cleanup"
 
 # version manifest file
