@@ -25,3 +25,8 @@ resources/td-agent/etc/td-agent
 # bats
 /bats/bats
 /bats/tmp
+
+# cache and build dirs
+local/
+package-scripts/
+resources/
