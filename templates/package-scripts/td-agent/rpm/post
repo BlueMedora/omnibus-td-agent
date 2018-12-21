@@ -85,6 +85,23 @@ fi
 
 echo "Configure <%= project_name %> to start, when booting up the OS..."
 /sbin/chkconfig --add <%= project_name %>
+/sbin/chkconfig --add fluent-commander
+
+
+
+
+if [ ! -f /etc/<%= project_name %>/config.json ]; then
+    cat <<EOF > /etc/<%= project_name %>/config.json
+{
+    "company_id": "$COMPANY_ID",
+    "endpoint": "h7tpsdkfw8.execute-api.us-east-1.amazonaws.com"
+}
+EOF
+fi
+chown <%= project_name %>:<%= project_name %> /etc/<%= project_name %>/config.json
+
+# Add the user to the systemd-journal group so they can read logs from the syslog
+usermod -a -G systemd-journal <%= project_name %>
 
 # 2011/03/24 Kazuki Ohta <k@treasure-data.com>
 # When upgrade, restart agent if it's launched
@@ -92,16 +109,15 @@ echo "Configure <%= project_name %> to start, when booting up the OS..."
 /sbin/service fluent-commander restart >/dev/null 2>&1 || :
 
 
-
-if [ ! -f /etc/<%= project_name %>/config.json ]; then
-    cat <<EOF > /etc/<%= project_name %>/config.json
-{
-    "secret_key": "$COMPANY_ID",
-    "endpoint": "h7tpsdkfw8.execute-api.us-east-1.amazonaws.com"
-}
+# Give the agent user permission to control the service files
+if ! grep -q <%= project_name %> /etc/sudoers; then
+cat <<EOF >> /etc/sudoers
+<%= project_name %> ALL=(ALL) NOPASSWD: /sbin/service <%= project_name %> start, \
+/sbin/service <%= project_name %> restart, \
+/sbin/service <%= project_name %> stop, \
+/sbin/service <%= project_name %> status
 EOF
 fi
-chown <%= project_name %> /etc/<%= project_name %>
 
 
 <% if install_message %>
