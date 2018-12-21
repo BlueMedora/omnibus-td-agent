@@ -19,8 +19,6 @@ build_version   "1.0.0"
 build_iteration 0
 
 # creates required build directories
-# TODO determine if this is needed
-# dependency "preparation"
 
 override :ruby, :version => '2.4.5'
 override :zlib, :version => '1.2.11'
@@ -44,6 +42,7 @@ when "linux"
     runtime_dependency "lsb-base"
   when "rhel"
     runtime_dependency "initscripts"
+    runtime_dependency "rpm-build"
     if ohai["platform_version"][0] == "5"
       runtime_dependency "redhat-lsb"
     else
