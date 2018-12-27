@@ -30,3 +30,4 @@ resources/td-agent/etc/td-agent
 local/
 package-scripts/
 resources/
+upload.sh
