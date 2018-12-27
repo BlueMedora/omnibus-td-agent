@@ -1,11 +1,11 @@
-name "td-agent"
+name 'td-agent'
 version '4' # git ref
 
-dependency "jemalloc" unless windows?
-dependency "ruby"
-dependency "nokogiri"
-dependency "postgresql" unless windows?
-dependency "fluentd"
+dependency 'jemalloc' unless windows?
+dependency 'ruby'
+dependency 'nokogiri'
+dependency 'postgresql' unless windows?
+dependency 'fluentd'
 
 build do
   env = with_standard_compiler_flags(with_embedded_path)
