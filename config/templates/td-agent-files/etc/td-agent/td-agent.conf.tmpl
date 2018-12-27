@@ -52,13 +52,9 @@
 #<source>
 #  @type tail
 #  @id input_tail
-<% if is_td_agent2 %>
-#  format apache2
-<% else %>
 #  <parse>
 #    @type apache2
 #  </parse>
-<% end %>
 #  path /var/log/httpd-access.log
 #  tag td.apache.access
 #</source>
@@ -97,15 +93,10 @@
 #    @type tdlog
 #    apikey API_KEY
 #    auto_create_table
-<% if is_td_agent2 %>
-#    buffer_type file
-#    buffer_path /var/log/<%= project_name %>/buffer/td
-<% else %>
 #    <buffer>
 #      @type file
 #      path /var/log/<%= project_name %>/buffer/td
 #    </buffer>
-<% end %>
 #  </store>
 #  <store>
 #    @type file

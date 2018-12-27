@@ -13,8 +13,8 @@ Environment=GEM_PATH=<%= install_path %>/embedded/lib/ruby/gems/<%= gem_dir_vers
 Environment=FLUENT_CONF=/etc/<%= project_name %>/<%= project_name %>.conf
 Environment=FLUENT_PLUGIN=/etc/<%= project_name %>/plugin
 Environment=FLUENT_SOCKET=/var/run/<%= project_name %>/<%= project_name %>.sock
-PIDFile=<%= Shellwords.shellescape(File.join(root_path, "var", "run", project_name, "fluent-commander.pid")) %>
-RuntimeDirectory=<%= Shellwords.shellescape(project_name) %>
+PIDFile=/var/run/<%= project_name %>/<%= commander_name %>.pid
+RuntimeDirectory=<%= project_name %>
 Type=simple
 ExecStart=/opt/<%= project_name %>/embedded/bin/agent
 ExecStop=/bin/kill -TERM ${MAINPID}

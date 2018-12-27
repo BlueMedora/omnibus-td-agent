@@ -1,7 +1,0 @@
-#!/opt/<%= project.name %>/embedded/bin/ruby
-ENV["GEM_HOME"]="/opt/<%= project.name %>/embedded/lib/ruby/gems/<%= gem_dir_version %>/"
-ENV["GEM_PATH"]="/opt/<%= project.name %>/embedded/lib/ruby/gems/<%= gem_dir_version %>/"
-ENV["FLUENT_CONF"]="/etc/<%= project.name %>/<%= project.name %>.conf"
-ENV["FLUENT_PLUGIN"]="/etc/<%= project.name %>/plugin"
-ENV["FLUENT_SOCKET"]="/var/run/<%= project.name %>/<%= project.name %>.sock"
-load "/opt/<%= project.name %>/embedded/bin/fluentd"
