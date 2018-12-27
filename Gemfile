@@ -4,7 +4,6 @@ source 'https://rubygems.org'
 gem 'berkshelf', '~> 6.0'
 
 # Install omnibus software
-# gem 'omnibus', '5.5'
 gem 'omnibus', :git => 'https://github.com/chef/omnibus.git' # for latest omnibus-software
 gem 'omnibus-software', :git => 'https://github.com/chef/omnibus-software.git'
 
