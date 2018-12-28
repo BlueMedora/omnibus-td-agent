@@ -3,11 +3,19 @@ version: 0.2
 run-as: bm-agent
 
 phases:
+  install:
+    commands:
+      - pip install --upgrade pip
+      - pip install --upgrade awscli
   build:
     run-as: root
     commands:
       - bundle install --path=/root/.bundler
       - bundle exec omnibus build bm-agent
+  post-build:
+    run-as: root
+    commands: 
+      - aws s3 cp pkg/bm-agent-1.0.0-0.el7.x86_64.rpm s3://agent-dev-latest.rpm
 artifacts:
   files:
     - pkg/bm-agent-1.0.0-0.el7.x86_64.rpm
