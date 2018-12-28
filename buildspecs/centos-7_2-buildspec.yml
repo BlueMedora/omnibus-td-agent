@@ -9,6 +9,6 @@ phases:
       - bundle install --path=/home/bm-agent/.bundler
       - bundle exec omnibus build bm-agent
 artifacts:
-	files:
-		- pkg/bm-agent-1.0.0-0.el7.x86_64.rpm
+  files:
+    - pkg/bm-agent-1.0.0-0.el7.x86_64.rpm
   discard-paths: yes
