@@ -6,7 +6,7 @@ phases:
   build:
     run-as: root
     commands:
-      - bundle install --path=/home/bm-agent/.bundler
+      - bundle install --path=/root/.bundler
       - bundle exec omnibus build bm-agent
 artifacts:
   files:
@@ -16,3 +16,4 @@ artifacts:
 cache:
   paths:
     - '/var/cache/omnibus/**/*'
+    - '/root/.bundler'
