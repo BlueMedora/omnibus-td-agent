@@ -1,7 +1,7 @@
-name "td-agent-files"
+name 'td-agent-files'
 version '11' # git ref
 
-dependency "td-agent"
+dependency 'td-agent'
 
 # This software setup td-agent related files, e.g. etc files.
 # Separating file into td-agent.rb and td-agent-files.rb is for speed up package building
@@ -9,23 +9,12 @@ dependency "td-agent"
 
 build do
   pkg_type = project.packagers_for_system.first.id.to_s
-  root_path = "/" # for ERB
   install_path = project.install_dir # for ERB
   project_name = project.name # for ERB
-  rb_major, rb_minor, rb_teeny = project.overrides[:ruby][:version].split("-", 2).first.split(".", 3)
+  rb_major, rb_minor, = project.overrides[:ruby][:version].split('-', 2).first.split('.', 3)
   gem_dir_version = "#{rb_major}.#{rb_minor}.0" # gem path's teeny version is always 0
-  install_message = "Install successful"
-  commander_name = "fluent-commander"
-
-  generate_from_template = ->(dst, src, erb_binding, opts={}) {
-    mode = opts.fetch(:mode, 0755)
-    destination = dst.gsub('td-agent', project.name)
-    FileUtils.mkdir_p File.dirname(destination)
-    File.open(destination, 'w', mode) do |f|
-      f.write ERB.new(File.read(src), nil, '<>').result(erb_binding)
-    end
-  }
-
+  install_message = 'Install successful'
+  commander_name = 'fluent-commander'
 
   if File.exist?(File.join('INSTALL_MESSAGE'))
     install_message = File.read(File.join('INSTALL_MESSAGE'))
@@ -49,9 +38,9 @@ build do
   end
 
   if %w[pkg dmg].include?(pkg_type)
-    plist_path = File.join(install_path, "td-agent.plist")
+    plist_path = File.join(install_path, 'td-agent.plist')
     mkdir File.dirname(plist_path)
-    erb source: "td-agent.plist.erb",
+    erb source: 'td-agent.plist.erb',
         dest: sub_name(plist_path),
         mode: 0o755,
         vars: {
