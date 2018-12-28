@@ -12,7 +12,7 @@ phases:
     commands:
       - bundle install --path=/root/.bundler
       - bundle exec omnibus build bm-agent
-  post-build:
+  post_build:
     run-as: root
     commands: 
       - aws s3 cp pkg/bm-agent-1.0.0-0.el7.x86_64.rpm s3://agent-dev-latest.rpm
