@@ -4,7 +4,7 @@ run-as: bm-agent
 
 phases:
   build:
-    run-as: bm-agent
+    run-as: root
     commands:
       - bundle install --path=/home/bm-agent/.bundler
       - bundle exec omnibus build bm-agent
