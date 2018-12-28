@@ -15,4 +15,4 @@ artifacts:
   discard-paths: yes
 cache:
   paths:
-    - '/opt/omnibus/**/*'
+    - '/var/cache/omnibus/**/*'
