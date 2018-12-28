@@ -1,0 +1,2 @@
+gem 'fluentd-stackdriver-plugin', :git => 'https://64783e90a7deaaa24a9fd6763635a485780c6590@github.com/BlueMedora/fluentd-stackdriver-plugin.git'
+gem 'fluentd_agent', :git => 'https://64783e90a7deaaa24a9fd6763635a485780c6590@github.com/BlueMedora/fluentd-controller.git'
