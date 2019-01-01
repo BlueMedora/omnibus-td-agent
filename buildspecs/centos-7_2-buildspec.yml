@@ -6,7 +6,7 @@ phases:
   build:
     run-as: root
     commands:
-      - bundle install --path=/root/.bundler
+      - bundle install --full-index --binstubs --path=/root/.bundler
       - bundle exec omnibus build bm-agent
   post_build:
     run-as: root
