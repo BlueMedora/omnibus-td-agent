@@ -10,5 +10,5 @@ dependency 'fluentd'
 build do
   env = with_standard_compiler_flags(with_embedded_path)
   gemfile = File.join(Omnibus::Config.project_root, 'InstalledGemfile')
-  bundle "install --gemfile=#{gemfile}", :env => { 'GITHUB_TOKEN' => ENV['GITHUB_TOKEN'] }
+  bundle "install --full-index --gemfile=#{gemfile}", :env => { 'GITHUB_TOKEN' => ENV['GITHUB_TOKEN'] }
 end
