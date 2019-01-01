@@ -1,5 +1,5 @@
 name 'td-agent-files'
-version '13' # git ref
+version '14' # git ref
 
 dependency 'td-agent'
 
@@ -24,8 +24,15 @@ build do
   end
 
   delete "#{project.package_scripts_path}/*"
-  Dir.glob(File.join('package-scripts', 'td-agent', pkg_type, '*')).each do |src|
-    dst = File.join(project.package_scripts_path, File.basename(src))
+  package_scripts = {
+    'rpm' => ['post', 'postun', 'preun'],
+    'deb' => ['postinst', 'postrm', 'prerm'],
+    'pkg' => ['postinstall']
+  }
+
+  package_scripts[pkg_type].each do |template_name|
+    src = File.join('package-scripts', 'td-agent', pkg_type, template_name)
+    dst = File.join(project.package_scripts_path, template_name)
     mkdir File.dirname(dst)
     erb source: src,
         dest: sub_name(dst),
