@@ -11,7 +11,7 @@ relative_path 'fluentd'
 build do
   env = with_standard_compiler_flags(with_embedded_path)
 
-  bundle 'install --path vendor/bundle'
+  bundle 'install --full-index --path vendor/bundle'
   rake 'build', env: env
   gem 'install --no-ri --no-rdoc pkg/fluentd-*.gem', env: env
 end
