@@ -25,15 +25,16 @@ build do
 
   delete "#{project.package_scripts_path}/*"
   package_scripts = {
-    'rpm' => ['post', 'postun', 'preun'],
+    'rpm' => ['pre', 'post', 'postun', 'preun'],
     'deb' => ['postinst', 'postrm', 'prerm'],
     'pkg' => ['postinstall']
   }
 
   package_scripts[pkg_type].each do |template_name|
-    src = File.join('package-scripts', 'td-agent', pkg_type, template_name)
+    src = "#{pkg_type}_#{template_name}"
     dst = File.join(project.package_scripts_path, template_name)
     mkdir File.dirname(dst)
+    print("Rendering #{src} to #{sub_name(dst)}")
     erb source: src,
         dest: sub_name(dst),
         mode: 0o755,
