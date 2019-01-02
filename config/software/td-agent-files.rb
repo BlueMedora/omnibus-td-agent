@@ -30,8 +30,18 @@ build do
       end
     }
 
-    if File.exist?(template.call('INSTALL_MESSAGE'))
-      install_message = File.read(template.call('INSTALL_MESSAGE'))
+    delete "#{project.package_scripts_path}/*"
+    Dir.glob(File.join('package-scripts', 'td-agent', pkg_type, '*')).each do |src|
+      dst = File.join(project.package_scripts_path, File.basename(src))
+      mkdir File.dirname(dst)
+      erb source: src,
+          dest: sub_name(dst),
+          mode: 0o755,
+          vars: {
+              project_name: project_name,
+              install_message: install_message,
+              gem_dir_version: gem_dir_version
+          }
     end
 
     # copy pre/post scripts into omnibus path (./package-scripts/td-agentN)
