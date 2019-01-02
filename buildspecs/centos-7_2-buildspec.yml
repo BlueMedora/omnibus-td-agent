@@ -19,5 +19,5 @@ artifacts:
   discard-paths: yes
 cache:
   paths:
-    - '/var/cache/omnibus/**/*'
+    - '/var/cache/omnibus/cache/**/*'
     - '/root/.bundler/**/*'
