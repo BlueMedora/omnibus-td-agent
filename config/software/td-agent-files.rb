@@ -1,5 +1,5 @@
 name 'td-agent-files'
-version '16' # git ref
+version '17' # git ref
 
 dependency 'td-agent'
 
@@ -8,7 +8,6 @@ dependency 'td-agent'
 
 
 build do
-  block do
     # setup related files
     pkg_type = project.packagers_for_system.first.id.to_s
     root_path = "/" # for ERB
@@ -96,5 +95,4 @@ build do
       FileUtils.rm_f(f) if File.file?(f)
       FileUtils.cp(File.join(project.resources_path, 'msi', 'td-agent-prompt.bat'), f)
     end
-  end
 end
