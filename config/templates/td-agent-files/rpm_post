@@ -71,10 +71,6 @@ if [ -f $install_dir/usr/sbin/<%= project_name %>-ui ]; then
     cp -f $install_dir/usr/sbin/<%= project_name %>-ui /usr/sbin/<%= project_name %>-ui
     chmod 755 /usr/sbin/<%= project_name %>-ui
 fi
-if [ -f $install_dir/usr/bin/td ]; then
-    cp -f $install_dir/usr/bin/td /usr/bin/td
-    chmod 755 /usr/bin/td
-fi
 
 if [ -d "/usr/lib/systemd/system/" ]; then
   cp -f $install_dir/etc/systemd/<%= project_name %>.service /usr/lib/systemd/system/
