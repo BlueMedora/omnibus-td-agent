@@ -11,10 +11,10 @@ phases:
   post_build:
     run-as: root
     commands: 
-      - aws s3 cp --quiet --acl public-read pkg/bm-agent-1.0.0-0.el7.x86_64.rpm s3://demo-log-installer/agent-latest.rpm
+      - aws s3 cp --quiet --acl public-read pkg/bm-agent-1.0.0-0.el7.x86_64.deb s3://demo-log-installer/agent-latest.deb
 artifacts:
   files:
-    - pkg/bm-agent-1.0.0-0.el7.x86_64.rpm
+    - pkg/bm-agent-1.0.0-0.el7.x86_64.deb
   name: agent-latest.rpm 
   discard-paths: yes
 cache:
