@@ -4,7 +4,8 @@ source 'https://rubygems.org'
 gem 'berkshelf', '~> 6.0'
 
 # Install omnibus software
-gem 'omnibus', :git => 'https://github.com/chef/omnibus.git' # for latest omnibus-software
+# TODO switch this back to main branch once it's merged
+gem 'omnibus', :git => 'https://github.com/ccheek21/omnibus.git', :ref => 'rpm-pretrans' # for latest omnibus-software
 gem 'omnibus-software', :git => 'https://github.com/chef/omnibus-software.git'
 
 # Use Test Kitchen with Vagrant for convering the build environment
