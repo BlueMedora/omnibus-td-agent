@@ -25,7 +25,7 @@ build do
 
   delete "#{project.package_scripts_path}/*"
   package_scripts = {
-    'rpm' => ['pretans', 'post', 'postun', 'preun'],
+    'rpm' => ['pretrans', 'post', 'postun', 'preun'],
     'deb' => ['postinst', 'postrm', 'prerm'],
     'pkg' => ['postinstall']
   }
