@@ -1,5 +1,7 @@
-ping -c 1 -W 0.7 -t 5 'http://bindplane.bluemedora.com/' > /dev/null 2>&1
+curl 'https://bindplane.bluemedora.com/' > /dev/null 2>&1
 if [ $? -eq 0 ] ; then
+  echo "Test connection to http://bindplane.bluemedora.com succeeded"
+else
   echo "Failed to connect to http://bindplane.bluemedora.com"
   echo "Please check internet connection and DNS configuration, then retry installation."
   exit 1
