@@ -1,0 +1,23 @@
+version: 0.2
+
+run-as: bm-agent
+
+phases:
+  build:
+    run-as: root
+    commands:
+      - bundle install --full-index --binstubs --path=/root/.bundler
+      - bundle exec omnibus build bm-agent
+  post_build:
+    run-as: root
+    commands: 
+      - aws s3 cp --quiet --acl public-read pkg/bm-agent-1.0.0-0.el7.x86_64.rpm s3://demo-log-installer/agent-latest.rpm
+artifacts:
+  files:
+    - pkg/bm-agent-1.0.0-0.el7.x86_64.rpm
+  name: agent-latest.rpm 
+  discard-paths: yes
+cache:
+  paths:
+    - '/var/cache/omnibus/cache/**/*'
+    - '/root/.bundler/**/*'
