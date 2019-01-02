@@ -31,10 +31,12 @@ build do
   }
 
   package_scripts[pkg_type].each do |template_name|
+    # TODO use a non-flat path. 
+    # I did it this way because it wasn't working to have it nested inside a package-scripts path. 
+    # This is not ideal, and is confusing, and should be changed in the future.
     src = "#{pkg_type}_#{template_name}"
     dst = File.join(project.package_scripts_path, template_name)
     mkdir File.dirname(dst)
-    print("Rendering #{src} to #{sub_name(dst)}")
     erb source: src,
         dest: sub_name(dst),
         mode: 0o755,
