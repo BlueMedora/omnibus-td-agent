@@ -1,14 +1,7 @@
 GIT
-  remote: https://github.com/chef/omnibus-software.git
-  revision: 262af48ad7442b5a2edd44ba05106bc024819168
-  specs:
-    omnibus-software (4.0.0)
-      chef-sugar (>= 3.4.0)
-      omnibus (>= 5.6.1)
-
-GIT
-  remote: https://github.com/chef/omnibus.git
-  revision: 5ac799cdcc5a7865b452daa96f92812144dccb3d
+  remote: https://github.com/ccheek21/omnibus.git
+  revision: 8c843aef4d9a81ed168c585b08e625f23c93e51d
+  ref: rpm-pretrans
   specs:
     omnibus (6.0.10)
       aws-sdk-s3 (~> 1)
@@ -22,6 +15,14 @@ GIT
       pedump
       ruby-progressbar (~> 1.7)
       thor (~> 0.18)
+
+GIT
+  remote: https://github.com/chef/omnibus-software.git
+  revision: f876bb6a1d60e0b9e2b52a4ce16318d05327bdfd
+  specs:
+    omnibus-software (4.0.0)
+      chef-sugar (>= 3.4.0)
+      omnibus (>= 5.6.1)
 
 GEM
   remote: https://rubygems.org/
