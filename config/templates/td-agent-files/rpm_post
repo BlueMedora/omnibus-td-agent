@@ -78,8 +78,8 @@ if [ -d "/usr/lib/systemd/system/" ]; then
 fi
 
 echo "Configure <%= project_name %> to start, when booting up the OS..."
-systemctl enable <%= project_name %>
-systemctl enable fluent-commander
+/sbin/chkconfig --add <%= project_name %>
+# TODO enable fluent_commander as well
 
 if [ ! -f /etc/<%= project_name %>/config.json ]; then
     cat <<EOF > /etc/<%= project_name %>/config.json
