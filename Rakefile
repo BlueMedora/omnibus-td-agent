@@ -26,13 +26,25 @@ end
 
 task :build do
   sh "docker run -it --rm "\
-    "-e GITHUB_TOKEN='2b44f9f7bb610d5dac0940577ec73857b10855b4' "\
+    "-e GITHUB_TOKEN='#{ENV['GITHUB_TOKEN']}' "\
     "-v $(PWD):/code  "\
     "-v /tmp/omnibus:/var/cache/omnibus "\
     "-v /tmp/bundler:/root/.bundler "\
     "-w /code "\
     "ccheek21/omnibus:centos-7.2 "\
     "bash -c 'bundle install --full-index --binstubs --path /root/.bundler && bundle  exec  omnibus build bm-agent'"
+end
+
+
+task :build_debug do
+  sh "docker run -it --rm "\
+    "-e GITHUB_TOKEN='#{ENV['GITHUB_TOKEN']}' "\
+    "-v $(PWD):/code  "\
+    "-v /tmp/omnibus:/var/cache/omnibus "\
+    "-v /tmp/bundler:/root/.bundler "\
+    "-w /code "\
+    "ccheek21/omnibus:centos-7.2 "\
+    "bash -c 'bundle install --full-index --binstubs --path /root/.bundler && bundle  exec  omnibus build bm-agent && bash'"
 end
 
 task :upload do
