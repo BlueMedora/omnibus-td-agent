@@ -1,5 +1,5 @@
 name 'td-agent-files'
-version '15' # git ref
+version '16' # git ref
 
 dependency 'td-agent'
 
