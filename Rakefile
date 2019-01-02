@@ -26,6 +26,7 @@ end
 
 task :build do
   sh "docker run -it --rm "\
+    "--cpus=4 "\
     "-e GITHUB_TOKEN='#{ENV['GITHUB_TOKEN']}' "\
     "-v $(PWD):/code  "\
     "-v /tmp/omnibus:/var/cache/omnibus "\
