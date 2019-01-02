@@ -1,3 +1,0 @@
-source 'https://rubygems.org'
-gem 'fluentd-stackdriver-plugin', :git => "https://#{ENV['GITHUB_TOKEN']}@github.com/BlueMedora/fluentd-stackdriver-plugin.git"
-gem 'fluentd_agent', :git => "https://#{ENV['GITHUB_TOKEN']}@github.com/BlueMedora/fluentd-controller.git"

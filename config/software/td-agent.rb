@@ -9,6 +9,6 @@ dependency 'fluentd'
 
 build do
   env = with_standard_compiler_flags(with_embedded_path)
-  gemfile = File.join(Omnibus::Config.project_root, 'InstalledGemfile')
-  bundle "install --binstubs --gemfile=#{gemfile}", :env => { 'GITHUB_TOKEN' => ENV['GITHUB_TOKEN'] }
+  gem "specific_install https://#{ENV['GITHUB_TOKEN']}@github.com/BlueMedora/fluentd-stackdriver-plugin.git"
+  gem "specific_install https://#{ENV['GITHUB_TOKEN']}@github.com/BlueMedora/fluentd-controller.git"
 end
