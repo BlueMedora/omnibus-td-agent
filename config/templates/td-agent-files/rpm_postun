@@ -1,0 +1,13 @@
+<% raise "Invalid project_name" if project_name == "" %>
+rm -rf /var/log/<%= project_name %>
+rm -rf /var/log/<%= project_name %>
+rm -rf /opt/<%= project_name %>
+rm -rf /etc/logrotate.d/<%= project_name %>
+rm -rf /tmp/<%= project_name %>
+rm -f /etc/init.d/<%= project_name %>
+rm -f /usr/sbin/<%= project_name %>
+rm -f /usr/sbin/<%= project_name %>-gem
+rm -f /usr/lib/systemd/system/<%= project_name %>.service
+rm -f /usr/lib/systemd/system/fluent-commander.service
+sed -i '/<%= project_name %>/d' /etc/sudoers
+
