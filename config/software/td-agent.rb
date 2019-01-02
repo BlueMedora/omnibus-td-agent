@@ -9,6 +9,7 @@ dependency 'fluentd'
 
 build do
   env = with_standard_compiler_flags(with_embedded_path)
+  gem "install specific_install"
   gem "specific_install https://#{ENV['GITHUB_TOKEN']}@github.com/BlueMedora/fluentd-stackdriver-plugin.git"
   gem "specific_install https://#{ENV['GITHUB_TOKEN']}@github.com/BlueMedora/fluentd-controller.git"
 end
