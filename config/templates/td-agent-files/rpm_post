@@ -1,4 +1,4 @@
-<%= project_name %>_dir=/opt/<%= project_name %>
+install_dir=/opt/<%= project_name %>
 
 echo "adding '<%= project_name %>' group..."
 getent group <%= project_name %> >/dev/null || /usr/sbin/groupadd -r <%= project_name %>
@@ -22,7 +22,7 @@ if [ ! -e "/etc/<%= project_name %>/" ]; then
 fi
 if [ ! -e "/etc/<%= project_name %>/<%= project_name %>.conf" ]; then
   echo "Installing default conffile..."
-  cp -f ${<%= project_name %>_dir}/etc/<%= project_name %>/<%= project_name %>.conf.tmpl /etc/<%= project_name %>/<%= project_name %>.conf
+  cp -f $install_dir/etc/<%= project_name %>/<%= project_name %>.conf.tmpl /etc/<%= project_name %>/<%= project_name %>.conf
   chown <%= project_name %>:<%= project_name %> /etc/<%= project_name %>/<%= project_name %>.conf
 fi
 
@@ -30,11 +30,11 @@ fi
 # This prevents prelink, to break the Ruby intepreter.
 if [ -d "/etc/prelink.conf.d/" ]; then
   echo "prelink detected. Installing /etc/prelink.conf.d/<%= project_name %>-ruby.conf ..."
-  cp -f ${<%= project_name %>_dir}/etc/<%= project_name %>/prelink.conf.d/<%= project_name %>.conf /etc/prelink.conf.d/<%= project_name %>-ruby.conf
+  cp -f $install_dir/etc/<%= project_name %>/prelink.conf.d/<%= project_name %>.conf /etc/prelink.conf.d/<%= project_name %>-ruby.conf
 elif [ -f "/etc/prelink.conf" ]; then
   if [ $(grep '\-b ${<%= project_name %>_dir}/embedded/bin/ruby' -c /etc/prelink.conf) -eq 0 ]; then
     echo "prelink detected, but /etc/prelink.conf.d/ dosen't exist. Adding /etc/prelink.conf ..."
-    echo "-b ${<%= project_name %>_dir}/embedded/bin/ruby" >> /etc/prelink.conf
+    echo "-b $install_dir/embedded/bin/ruby" >> /etc/prelink.conf
   fi
 fi
 
@@ -42,7 +42,7 @@ fi
 # Install log rotation script.
 if [ -d "/etc/logrotate.d/" -a ! -f "/etc/logrotate.d/<%= project_name %>" ]; then
   echo "Installing logrotate.d config"
-  cp -f ${<%= project_name %>_dir}/etc/<%= project_name %>/logrotate.d/<%= project_name %>.logrotate /etc/logrotate.d/<%= project_name %>
+  cp -f $install_dir/etc/<%= project_name %>/logrotate.d/<%= project_name %>.logrotate /etc/logrotate.d/<%= project_name %>
 fi
 
 # 2011/11/13 Kazuki Ohta <k@treasure-data.com>
@@ -62,25 +62,25 @@ if [ -d "/tmp/<%= project_name %>/" ]; then
   chown -R <%= project_name %>:<%= project_name %> /tmp/<%= project_name %>/
 fi
 
-cp -f ${<%= project_name %>_dir}/etc/init.d/<%= project_name %> /etc/init.d/<%= project_name %>
-cp -f ${<%= project_name %>_dir}/usr/sbin/<%= project_name %> /usr/sbin/<%= project_name %>
+cp -f $install_dir/etc/init.d/<%= project_name %> /etc/init.d/<%= project_name %>
+cp -f $install_dir/usr/sbin/<%= project_name %> /usr/sbin/<%= project_name %>
 chmod 755 /usr/sbin/<%= project_name %>
-cp -f ${<%= project_name %>_dir}/usr/sbin/<%= project_name %>-gem /usr/sbin/<%= project_name %>-gem
+cp -f $install_dir/usr/sbin/<%= project_name %>-gem /usr/sbin/<%= project_name %>-gem
 chmod 755 /usr/sbin/<%= project_name %>-gem
-if [ -f ${<%= project_name %>_dir}/usr/sbin/<%= project_name %>-ui ]; then
-    cp -f ${<%= project_name %>_dir}/usr/sbin/<%= project_name %>-ui /usr/sbin/<%= project_name %>-ui
+if [ -f $install_dir/usr/sbin/<%= project_name %>-ui ]; then
+    cp -f $install_dir/usr/sbin/<%= project_name %>-ui /usr/sbin/<%= project_name %>-ui
     chmod 755 /usr/sbin/<%= project_name %>-ui
 fi
-if [ -f ${<%= project_name %>_dir}/usr/bin/td ]; then
-    cp -f ${<%= project_name %>_dir}/usr/bin/td /usr/bin/td
+if [ -f $install_dir/usr/bin/td ]; then
+    cp -f $install_dir/usr/bin/td /usr/bin/td
     chmod 755 /usr/bin/td
 fi
 
 if [ -d "/usr/lib/systemd/system/" ]; then
-  cp -f ${<%= project_name %>_dir}/etc/systemd/<%= project_name %>.service /usr/lib/systemd/system/
+  cp -f $install_dir/etc/systemd/<%= project_name %>.service /usr/lib/systemd/system/
   chmod 644 /usr/lib/systemd/system/<%= project_name %>.service
 
-  cp -f ${<%= project_name %>_dir}/etc/systemd/fluent-commander.service /usr/lib/systemd/system/
+  cp -f $install_dir/etc/systemd/fluent-commander.service /usr/lib/systemd/system/
   chmod 644 /usr/lib/systemd/system/fluent-commander.service
 fi
 
