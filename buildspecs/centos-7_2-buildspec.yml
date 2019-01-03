@@ -5,7 +5,7 @@ phases:
     run-as: root
     commands:
       - export FLUENTD_STACKDRIVER_SOURCE=$CODEBUILD_SRC_DIR_fluentd_stackdriver_plugin_source
-      - export FLUENTD_COMMANDER_SOURCE=$CODEBUILD_SRC_DIR_fluentd_commander_source
+      - export FLUENTD_COMMANDER_SOURCE=$CODEBUILD_SRC_DIR_fluentd_controller_source
       - bundle install --full-index --binstubs --path=/root/.bundler
       - bundle exec omnibus build bm-agent
   post_build:
