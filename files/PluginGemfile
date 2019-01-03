@@ -1,2 +1,3 @@
+source 'https://rubygems.org'
 gem 'fluentd-stackdriver-plugin', path: "#{ENV['FLUENTD_STACKDRIVER_SOURCE']}"
 gem 'fluentd_agent', path: "#{ENV['FLUENTD_COMMANDER_SOURCE']}"
