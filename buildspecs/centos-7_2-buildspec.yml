@@ -1,7 +1,5 @@
 version: 0.2
 
-run-as: bm-agent
-
 phases:
   build:
     run-as: root
@@ -17,6 +15,7 @@ phases:
 artifacts:
   files:
     - pkg/bm-agent-1.0.0-0.el7.x86_64.rpm
+  name: bm-agent-rpm
   discard-paths: yes
 cache:
   paths:
