@@ -9,5 +9,6 @@ dependency 'fluentd'
 
 build do
   env = with_standard_compiler_flags(with_embedded_path)
-  bundle "install --gemfile=PluginGemfile", env: ENV
+  bundle "install --gemfile=#{File.join(project.project_root, 'PluginGemfile'}", env: ENV
+  
 end
