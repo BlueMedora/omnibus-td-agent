@@ -1,0 +1,2 @@
+gem 'fluentd-stackdriver-plugin', path: "#{ENV['FLUENTD_STACKDRIVER_SOURCE']}"
+gem 'fluentd-commander-plugin', path: "#{ENV['FLUENTD_COMMANDER_SOURCE']}"
