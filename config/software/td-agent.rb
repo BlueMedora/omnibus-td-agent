@@ -9,5 +9,6 @@ dependency 'fluentd'
 
 build do
   env = with_standard_compiler_flags(with_embedded_path)
-  bundle "install --gemfile=#{File.join(project.files_path, 'PluginGemfile')}", env: ENV
+  gem "install --local #{ENV['FLUENTD_STACKDRIVER_SOURCE']}"
+  gem "install --local #{ENV['FLUENTD_COMMANDER_SOURCE']}"
 end
