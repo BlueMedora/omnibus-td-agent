@@ -107,9 +107,10 @@ usermod -a -G systemd-journal <%= project_name %>
 if ! grep -q <%= project_name %> /etc/sudoers; then
 cat <<EOF >> /etc/sudoers
 <%= project_name %> ALL=(ALL) NOPASSWD: /sbin/service <%= project_name %> start, \
-/sbin/service <%= project_name %> restart, \
-/sbin/service <%= project_name %> stop, \
-/sbin/service <%= project_name %> status
+/usr/bin/systemctl restart <%= project_name %>, \
+/usr/bin/systemctl stop <%= project_name %>, \
+/usr/bin/systemctl start <%= project_name %>, \
+/usr/bin/systemctl status <%= project_name %>
 EOF
 fi
 
