@@ -93,6 +93,7 @@ if [ ! -f /etc/<%= project_name %>/config.json ]; then
 EOF
 fi
 chown <%= project_name %>:<%= project_name %> /etc/<%= project_name %>/config.json
+chown -R <%= project_name %>:<%= project_name %> /opt/<%= project_name %>
 
 # Add the user to the systemd-journal group so they can read logs from the syslog
 usermod -a -G systemd-journal <%= project_name %>
