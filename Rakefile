@@ -42,6 +42,7 @@ task :build, [:platform, :commander_version] do |t, args|
 end
 
 task :release do
-
+  version = Bump::Bump.current
+  sh "aws s3 cp pkg/bm-agent-#{version}-0.el7.x86_64.rpm s3://bindplane-logs-downloads/agent/centos7/"
 end
 
