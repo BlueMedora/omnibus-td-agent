@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'bump'
+
 # Use Berkshelf for resolving cookbook dependencies
 gem 'berkshelf', '~> 6.0'
 

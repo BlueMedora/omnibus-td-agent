@@ -1,9 +1,13 @@
 require 'rake'
 require 'rspec/core/rake_task'
 require 'shellwords'
+require 'bump/tasks'
 
 task :spec    => ['spec:all', 'bats:all']
 task :default => :spec
+
+Bump.replace_in_default = ['config/projects/bm-agent.rb']
+Bump.tag_by_default = true
 
 namespace :spec do
   targets = []
@@ -24,32 +28,20 @@ namespace :spec do
   end
 end
 
-task :build do
-  sh "docker run -it --rm "\
-    "--cpus=4 "\
-    "-e GITHUB_TOKEN='#{ENV['GITHUB_TOKEN']}' "\
-    "-v $(PWD):/code  "\
-    "-v /tmp/omnibus:/var/cache/omnibus "\
-    "-v /tmp/bundler:/root/.bundler "\
-    "-w /code "\
-    "ccheek21/omnibus:centos-7.2 "\
-    "bash -c 'bundle install --full-index --binstubs --path /root/.bundler && bundle  exec  omnibus build bm-agent'"
+task :build, [:platform, :commander_version] do |t, args|
+  args.with_defaults(platform: 'centos7', commander_version: 'latest')
+  sh 'docker run -it --rm '\
+    '--cpus=4 '\
+    '-v $HOME/.ssh:/root/.ssh '\
+    '-v $(PWD):/code  '\
+    "-v $(PWD)/cache/#{args.platform}:/var/cache/omnibus "\
+    "-v $(PWD)/cache/bundler/#{args.platform}:/root/.bundler "\
+    '-w /code '\
+    "omnibus-#{args.platform} "\
+    "bash -c 'rbenv exec bundle install --full-index --binstubs --path /root/.bundler && rbenv exec bundle  exec  omnibus build bm-agent'"
 end
 
+task :release do
 
-task :build_debug do
-  sh "docker run -it --rm "\
-    "-e GITHUB_TOKEN='#{ENV['GITHUB_TOKEN']}' "\
-    "-v $(PWD):/code  "\
-    "-v /tmp/omnibus:/var/cache/omnibus "\
-    "-v /tmp/bundler:/root/.bundler "\
-    "-w /code "\
-    "ccheek21/omnibus:centos-7.2 "\
-    "bash -c 'bundle install --full-index --binstubs --path /root/.bundler && bundle  exec  omnibus build bm-agent && bash'"
 end
 
-task :upload do
-  sh "aws s3 cp --acl public-read pkg/bm-agent-1.0.0-0.el7.x86_64.rpm s3://demo-log-installer/agent-dev-latest.rpm"
-  print("Upload complete.")
-  print("RPM can be downloaded at http://s3.amazonaws.com/demo-log-installer/agent-dev-latest.rpm")
-end
