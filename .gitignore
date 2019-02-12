@@ -9,6 +9,7 @@ bin/*
 files/**/cache/
 resources/**/cache/
 vendor/cookbooks
+cache/*
 
 # td-agent specific package
 core_gems/*
