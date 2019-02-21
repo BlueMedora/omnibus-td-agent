@@ -36,7 +36,7 @@ task :build, [:platform] do |t, args|
     "-v $(pwd)/cache/bundler/#{args.platform}:/root/.bundler "\
     '-w /code '\
     'ccheek21/omnibus:centos-7.2 '\
-    "bash -c 'chmod 600 /root/.ssh/config && rbenv exec bundle install --full-index --binstubs --path /root/.bundler && rbenv exec bundle  exec  omnibus build bm-agent'"
+    "bash -c 'chmod 600 /root/.ssh/config && chown $(whoami) /root/.ssh/config && rbenv exec bundle install --full-index --binstubs --path /root/.bundler && rbenv exec bundle  exec  omnibus build bm-agent'"
 end
 
 task :release do
