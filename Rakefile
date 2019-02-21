@@ -31,7 +31,7 @@ task :build, [:platform] do |t, args|
   args.with_defaults(platform: 'centos7')
   sh 'docker run -it --rm '\
     '-v $HOME/.ssh:/root/.ssh '\
-    '-v .:/code  '\
+    '-v $(pwd)/:/code  '\
     "-v ./cache/#{args.platform}:/var/cache/omnibus "\
     "-v ./cache/bundler/#{args.platform}:/root/.bundler "\
     '-w /code '\
