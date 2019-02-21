@@ -9,6 +9,7 @@ branches:
 cache:
   directories:
   - cache
+  - /home/travis/.rvm/
 before_deploy: mkdir pkg/upload/$BUILD_PLATFORM && mv pkg/*.rpm pkg/upload/$BUILD_PLATFORM
 deploy:
   provider: s3
