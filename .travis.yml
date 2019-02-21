@@ -1,3 +1,21 @@
-language: c
-install: git clone --depth 1 https://github.com/sstephenson/bats.git bats/bats
-script: bats/bats/bin/bats --tap bats
+language: ruby
+rvm:
+- 2.4.5
+env:
+- BUILD_PLATFORM=centos7
+branches:
+  only:
+  - bm-agent
+cache:
+  directories:
+  - cache
+before_deploy: mkdir pkg/upload/$BUILD_PLATFORM && mv pkg/*.rpm pkg/upload/$BUILD_PLATFORM
+deploy:
+  provider: s3
+  access_key_id:
+    secure: q8Xzq9Xc2DDa7lSPqnU2DhKkarkfzCO8Q4aQK4D1je9ljg4Wpp9t8EbU+xppJjuW8F3pD24/VfM226EB/VTQg9sTE9IhEgmvFDxb8L5JeqhiC3mO3g6azOZiknHFVW+1VgVUxO4Z9RFt74E4JwFSK4ioGruoQhUX59MCz9NJvi5auSrrWUVxZ4jLAUeF1QLGSeYKJoqdFLZj1LftsyUy6C/kHHQePuNJMehXi7YecCgeyZZXdjr6Gvb+Jc80pv6mTfB/ADpA4SZPNEVzrkwER31QDroLiHSklasW4cnwcMwrbvXGKBJlsc3U3LNtmqY+7/6rFXWMBsog/1knbjW85gEgoPM6IQjHhGC8VNbye4frALYCcUeSucHqSNRJZER4V+0pl+dqPGxuWm63HhJPKN9bvtcjwsaJCLuxrO1MQoHlsLCYRXJgAbHySqyvdyuSgq6lUQNUxQM988SI7Ej62TVuUBGV3B4w9/1FSAm9ltZgibQg9cwiamstBSMel8aPfeM3OyRUCTOwdRyMyrjeBQkIe0REElx6OTRdp/7MxvWPDVjqePRajFNYXFyH7W9UEiaRLETLD13PT40uydWkk/4JO5x4leP7gSxuRAEw3t7C7zC+wUHlpJOcjx4xt/GHtlDHwhnhDQVjUEYQMkhlm6BLUr+7hF2RwCxOLydfWAQ=
+  secret_access_key:
+    secure: anGp5fI6M1oUgFSPz8zW1c3T95P5CYr88zJIjaCYqxxSw8ptLqYU/by4mz0NoRBv8nnZ2cO1xrP8NawMiTgM6Vpk38LVD64yRqIapXcaBx3u00uMiKWrWPQyilPhMc79JrcGLZ4/CX8VGlhu+7BqDaLqLwgerVLbLfW/2oaNutsYg+3S0qE10kbZskkvp8YFNBR39AkAip1A/WtKGrzI7TK53PmRRyTvJmbocjF5ZvGeqaNK86mWvPAdN6FbJJvsEZ5ZQLLL6YLmyPMXnFknARM8HBI8qgGEOcjk9PPrAE84GegtExeyEVb7UGzIVu7nHa6zjxrEtPZt/AFji7TV1WDx1RDYzsJCHgLVCz/pTMH8UXzHJJKN9sfUc3WZSZEFQLQRFezivkAt0BORxehsOk/tCELVLbHwD0BgJnbnzqpqFjN9Kt7zAyq9rnM/pOqdhbwh/ARdQPhCEsNugvD0dNcm4LMgJLi9VcGYUU6Cl3uTV6L70GrlWujyzRRYoyVSD9r752B0RXsPoR2A6+nucGS7mUX7PSvCp4xPSbGkh4iaM7qyJrcpnlovunJ4ud+vqQhAUoN3HV3OyBca7J9FXicGp0qJaLMIupgBe7SdVr8Ij6yzXAW8b3h14RM9MJ8GTAQgo1Sh6rNJdMFnDmY088y+Wt1E/qmSbbjGWWBfqrI=
+  bucket: bindplane-logs-downloads
+  upload-dir: agent
+  local_dir: pkg/upload
