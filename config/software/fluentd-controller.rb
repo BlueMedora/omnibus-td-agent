@@ -5,7 +5,7 @@ dependency 'bundler'
 
 version = '0.2.11'
 default_version "v#{version}"
-source git: 'git@github.com:BlueMedora/fluentd-controller.git'
+source git: "https://#{ENV['GITHUB_TOKEN']}@github.com/BlueMedora/fluentd-controller"
 relative_path 'fluentd-controller'
 
 build do

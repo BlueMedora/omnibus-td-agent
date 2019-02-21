@@ -30,7 +30,7 @@ end
 task :build, [:platform] do |t, args|
   args.with_defaults(platform: 'centos7')
   sh 'docker run -it --rm '\
-    '-v $HOME/.ssh:/root/.ssh '\
+    "-e GITHUB_TOKEN=#{ENV['GITHUB_TOKEN']} " \
     '-v $(pwd)/:/code  '\
     "-v $(pwd)/cache/#{args.platform}:/var/cache/omnibus "\
     "-v $(pwd)/cache/bundler/#{args.platform}:/root/.bundler "\
