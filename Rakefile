@@ -4,7 +4,7 @@ require 'shellwords'
 require 'bump/tasks'
 
 task :spec    => ['spec:all', 'bats:all']
-task :default => :spec
+task :default => :build
 
 Bump.replace_in_default = ['config/projects/bm-agent.rb']
 Bump.tag_by_default = true
@@ -28,8 +28,8 @@ namespace :spec do
   end
 end
 
-task :build, [:platform, :commander_version] do |t, args|
-  args.with_defaults(platform: 'centos7', commander_version: 'latest')
+task :build, [:platform] do |t, args|
+  args.with_defaults(platform: 'centos7')
   sh 'docker run -it --rm '\
     '--cpus=4 '\
     '-v $HOME/.ssh:/root/.ssh '\

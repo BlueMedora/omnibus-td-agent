@@ -1,10 +1,9 @@
 name 'fluentd-controller'
-# fluentd v0.14.11
 
 dependency 'ruby'
 dependency 'bundler'
 
-version = '0.2.10'
+version = '0.2.11'
 default_version "v#{version}"
 source git: 'git@github.com:BlueMedora/fluentd-controller.git'
 relative_path 'fluentd-controller'
