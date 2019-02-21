@@ -33,9 +33,9 @@ task :build, [:platform] do |t, args|
   sh 'docker run -it --rm '\
     '--cpus=4 '\
     '-v $HOME/.ssh:/root/.ssh '\
-    '-v $(PWD):/code  '\
-    "-v $(PWD)/cache/#{args.platform}:/var/cache/omnibus "\
-    "-v $(PWD)/cache/bundler/#{args.platform}:/root/.bundler "\
+    '-v .:/code  '\
+    "-v ./cache/#{args.platform}:/var/cache/omnibus "\
+    "-v ./cache/bundler/#{args.platform}:/root/.bundler "\
     '-w /code '\
     "omnibus-#{args.platform} "\
     "bash -c 'rbenv exec bundle install --full-index --binstubs --path /root/.bundler && rbenv exec bundle  exec  omnibus build bm-agent'"
