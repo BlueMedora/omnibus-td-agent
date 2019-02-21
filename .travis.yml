@@ -10,7 +10,7 @@ services:
   - docker
 branches:
   only:
-  - bm-agent
+  - master
 cache:
   directories:
   - cache
