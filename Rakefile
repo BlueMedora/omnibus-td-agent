@@ -1,8 +1,5 @@
 require 'rake'
-require 'rspec/core/rake_task'
-require 'shellwords'
-require 'bump/tasks'
-
+require 'rspec/core/rake_task' require 'shellwords' require 'bump/tasks' 
 task :spec    => ['spec:all', 'bats:all']
 task :default => :build
 
@@ -36,7 +33,7 @@ task :build, [:platform] do |t, args|
     "-v ./cache/#{args.platform}:/var/cache/omnibus "\
     "-v ./cache/bundler/#{args.platform}:/root/.bundler "\
     '-w /code '\
-    "omnibus-#{args.platform} "\
+    'ccheek21/omnibus:centos-7.2 '\
     "bash -c 'rbenv exec bundle install --full-index --binstubs --path /root/.bundler && rbenv exec bundle  exec  omnibus build bm-agent'"
 end
 
