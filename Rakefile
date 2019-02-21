@@ -32,8 +32,8 @@ task :build, [:platform] do |t, args|
   sh 'docker run -it --rm '\
     '-v $HOME/.ssh:/root/.ssh '\
     '-v $(pwd)/:/code  '\
-    "-v ./cache/#{args.platform}:/var/cache/omnibus "\
-    "-v ./cache/bundler/#{args.platform}:/root/.bundler "\
+    "-v $(pwd)/cache/#{args.platform}:/var/cache/omnibus "\
+    "-v $(pwd)/cache/bundler/#{args.platform}:/root/.bundler "\
     '-w /code '\
     'ccheek21/omnibus:centos-7.2 '\
     "bash -c 'rbenv exec bundle install --full-index --binstubs --path /root/.bundler && rbenv exec bundle  exec  omnibus build bm-agent'"
