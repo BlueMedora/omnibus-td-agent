@@ -31,7 +31,6 @@ end
 task :build, [:platform] do |t, args|
   args.with_defaults(platform: 'centos7')
   sh 'docker run -it --rm '\
-    '--cpus=4 '\
     '-v $HOME/.ssh:/root/.ssh '\
     '-v .:/code  '\
     "-v ./cache/#{args.platform}:/var/cache/omnibus "\
